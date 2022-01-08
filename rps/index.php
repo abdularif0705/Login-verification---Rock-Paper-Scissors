@@ -2,7 +2,7 @@
 <!--<html>-->
 <head>
 <title>Abdul Arif - Rock Paper Scissors</title>
-<?php require_once "bootstrap.php"; ?>
+<?php require_once "bootstrap.php"; // link css stylesheets to php files ?>
 </head>
 <body>
 <div class="container">
