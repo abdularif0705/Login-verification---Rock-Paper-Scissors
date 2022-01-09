@@ -37,7 +37,7 @@ if ( isset($_POST['who']) && isset($_POST['pass']) ) {
 <!--<html>-->
 <head>
 <?php require_once "bootstrap.php"; ?>
-<title>Abdul Arif's Login Page</title>
+<title>Abdulrehman Arif's Login Page</title>
 </head>
 <body>
 <div class="container">
@@ -53,16 +53,16 @@ if ( $failure !== false ) {
 <form method="POST">
 <label for="name">User Name</label>
 <input type="text" name="who" id="name"><br/>
-<label for="id_1723">Password</label>
-<input type="text" name="pass" id="id_1723"><br/>
+<label for="id_2000">Password</label>
+<input type="text" name="pass" id="id_2000"><br/>
 <input type="submit" value="Log In">
 <input type="submit" name="cancel" value="Cancel">
 </form>
 <p>
 For a password hint, view source and find a password hint
 in the HTML comments.
-<!-- Hint: The password is the four character sound a wolf
-makes (all lower case) followed by 123. -->
+<!-- Hint: The password is the four character sound of the programming language of this page
+ (all lower case) followed by 123. -->
 </p>
 </div>
 </body>

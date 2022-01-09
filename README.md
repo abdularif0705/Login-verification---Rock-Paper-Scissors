@@ -6,28 +6,24 @@ When you first come to the application (index.php) you are told to go to a login
 ![index.php](images/01-RPS-Index.png)
 
 ### Login page - [login.php](rps/login.php)
-
 The login screen has error checking on its input data. If either the name or the
 password field is blank, a message of this form shows up:
-```css
-User name and password are required
-```
+![login_error1.php](images/02-RPS-Login-Bad.png)
 If the password is non-blank and incorrect, message comes in the form of:
-![login_error.php](images/03-RPS-Login-Bad.png)
+![login_error2.php](images/03-RPS-Login-Bad.png)
 If there are errors, it comes back to the login screen (login.php) and shows the error
 with blank input fields (i.e. doesn't carry over the values for name="who" and name="pass" fields
 from the previous post).
 
 I used a "salted hash" for the password. The "plaintext" of the password is not
-present in the application source code except in comments.
-The stored_hash is the MD5 of the salt concatenated with the plaintext of password(here-check123).
-This is computed using the following PHP:
+present in the application source code except in comments. I used the following values for the salt and stored hash:
 ```php
 $salt = 'XyZzy12*_';
-//  The stored_hash is the MD5 of the salt concatenated with the plaintext of php123 - which is
-//  the password. This hash is computed using the following PHP:
-// $md5 = hash('md5', 'XyZzy12*_php123'); which equals the $stored_hash below
 $stored_hash = '1a52e17fa899cf40fb04cfc42e6352f1';  // Pw is php123
+```
+The stored_hash is the MD5 of the salt concatenated with the plaintext of php123 - which is the password. This is computed using the following PHP:
+```php
+$md5 = hash('md5', 'XyZzy12*_php123');
 ```
 In order to check an incoming password I concatenated the salt plus password together and
 then run that through the hash() function and compared it to the stored_hash.
@@ -37,16 +33,19 @@ is redirected to the game.php page with the user's name as a GET parameter using
 ```php
 header("Location: game.php?name=".urlencode($_POST['who']));
 ```
+
 ### Gaming Area - [game.php](rps/game.php)
-In order to protect the game from being played without the user properly logging in, the game.php first
+In order to protect the game from being played without the user properly logging in, the <b>game.php</b> first
 checks the session to see if the user's name is set and if the user's name is not set in the session
 the game.php stops immediately using the PHP die() function:
 ```php
 die("Name parameter missing");
 ```
 To test, navigate to game.php manually without logging in - it fails with - "Name parameter missing".
+
 If the user is logged in, they are presented with a drop-down menu showing the options Rock, Paper, Scissors,
 and Test as well as buttons labeled "Play" and "Logout".
+![play_start.php](images/04-RPS-Play-Start.png)
 If the Logout button is pressed the user is redirected back to the index.php page using:
 ```php
 header('Location: index.php');
@@ -79,3 +78,8 @@ for($c=0;$c<3;$c++) {
     }
 }
 ```
+The $names variable contains the strings "Rock", "Paper", and "Scissors" in this example. The output of this looks as follows:
+![test.php](images/05-RPS-Test.png)
+This will allow us to make sure that the check() function properly handles all combinations of the possible plays without having to play for a long time as the computer makes random plays. 
+
+![win.php](images/07-Computer-Picks-Random.png)07-Computer-Picks-Random
