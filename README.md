@@ -8,9 +8,11 @@ When you first come to the application (index.php) you are told to go to a login
 ### Login page - [login.php](rps/login.php)
 The login screen has error checking on its input data. If either the name or the
 password field is blank, a message of this form shows up:
-![login_error1.php](images/02-RPS-Login-Bad.png)
+![login_error1.php](images/02-RPS-Login-Bad.png)                         
+
 If the password is non-blank and incorrect, message comes in the form of:
-![login_error2.php](images/03-RPS-Login-Bad.png)
+![login_error2.php](images/03-RPS-Login-Bad.png)                         
+
 If there are errors, it comes back to the login screen (login.php) and shows the error
 with blank input fields (i.e. doesn't carry over the values for name="who" and name="pass" fields
 from the previous post).
@@ -45,7 +47,8 @@ To test, navigate to game.php manually without logging in - it fails with - "Nam
 
 If the user is logged in, they are presented with a drop-down menu showing the options Rock, Paper, Scissors,
 and Test as well as buttons labeled "Play" and "Logout".
-![play_start.php](images/04-RPS-Play-Start.png)
+![play_start.php](images/04-RPS-Play-Start.png)                         
+
 If the Logout button is pressed the user is redirected back to the index.php page using:
 ```php
 header('Location: index.php');
@@ -60,13 +63,36 @@ The computation whether the user wins, loses, or ties is done by a function name
 // and returns "Tie", "You Lose", "You Win" depending on play
 // where "You" is the human being addressed by the computer
 function check($computer, $human) {
-    ...
-        return "Tie";
-    ...
-        return "You Win";
-    ...
-        return "You Lose";
-    ...
+    switch ($computer) {
+        case 0: // if $computer chose Rock
+            if ( $human == 0 ) {
+                return "Tie";
+            } else if ( $human == 1 ) {
+                return "You Win";
+            } else if ( $human == 2 ) {
+                return "You Lose";
+            }
+            break;
+        case 1:
+            if ( $human == 0 ) {
+                return "You Lose";
+            } else if ( $human == 1 ) {
+                return "Tie";
+            } else if ( $human == 2 ) {
+                return "You Win";
+            }
+            break;
+        case 2:
+            if ( $human == 0 ) {
+                return "You Win";
+            } else if ( $human == 1 ) {
+                return "You Lose";
+            } else if ( $human == 2 ) {
+                return "Tie";
+            }
+            break;
+    }
+    return false;
 }
 ```
 The "Test" option requirements : two nested for loops that tests all combinations of possible human and computer play combinations:
@@ -78,8 +104,10 @@ for($c=0;$c<3;$c++) {
     }
 }
 ```
+
 The $names variable contains the strings "Rock", "Paper", and "Scissors" in this example. The output of this looks as follows:
-![test.php](images/05-RPS-Test.png)
+![test.php](images/05-RPS-Test.png)                         
+
 This will allow us to make sure that the check() function properly handles all combinations of the possible plays without having to play for a long time as the computer makes random plays. 
 
-![win.php](images/07-Computer-Picks-Random.png)07-Computer-Picks-Random
+![win.php](images/07-Computer-Picks-Random.png)                         
